@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="z5p-uU-Wr5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A386a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="z5p-uU-Wr5">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
@@ -73,7 +72,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="f6Z-Ko-C1s" kind="push" id="YbL-df-ugv"/>
+                                            <segue destination="f6Z-Ko-C1s" kind="push" identifier="detailSegue" id="YbL-df-ugv"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="xi3-l2-87g">
@@ -133,7 +132,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="auX-yF-bJZ" kind="modal" id="PmA-zT-WBf"/>
+                                    <segue destination="auX-yF-bJZ" kind="modal" identifier="createSegue" id="PmA-zT-WBf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -143,6 +142,11 @@
                     <connections>
                         <outlet property="feedImage" destination="H8g-Sp-gHm" id="Lc4-VV-wHK"/>
                         <outlet property="scrollView" destination="H8J-28-EZ6" id="vk2-w8-WUj"/>
+                        <outlet property="wedding1Image" destination="xi3-l2-87g" id="eTb-TT-YoC"/>
+                        <outlet property="wedding2Image" destination="MZn-FS-UR4" id="hc5-jN-3M5"/>
+                        <outlet property="wedding3Image" destination="Ut3-tM-SSD" id="rcB-Ld-OOF"/>
+                        <outlet property="wedding4Image" destination="45D-mq-VQf" id="xBH-k6-vJJ"/>
+                        <outlet property="wedding5Image" destination="cBf-Wj-Pty" id="C2K-ja-qyo"/>
                         <segue destination="g8q-qT-qEI" kind="modal" identifier="imageSegue" id="THB-B8-mQF"/>
                     </connections>
                 </viewController>
@@ -218,7 +222,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Af6-oJ-SRS">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="3" id="Af6-oJ-SRS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -246,6 +250,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="46R-xq-FyA" id="lGc-kH-ViF"/>
+                        <outlet property="imageControls" destination="mqU-45-bGo" id="yfe-Yt-ZaZ"/>
                         <outlet property="imageView" destination="7gh-eq-L9u" id="lhb-0U-pgc"/>
                         <outlet property="scrollView" destination="Af6-oJ-SRS" id="6eu-RI-KFA"/>
                     </connections>

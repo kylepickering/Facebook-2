@@ -12,17 +12,28 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var feedImage: UIImageView!
+    @IBOutlet weak var wedding1Image: UIImageView!
+    @IBOutlet weak var wedding2Image: UIImageView!
+    @IBOutlet weak var wedding3Image: UIImageView!
+    @IBOutlet weak var wedding4Image: UIImageView!
+    @IBOutlet weak var wedding5Image: UIImageView!
     
     var isPresenting: Bool = true
     var tappedView: UIImageView!
+    var imageArray: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        scrollView.contentSize.height = feedImage.frame.height
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-
+        imageArray = [
+            UIImage(named: "wedding1"),
+            UIImage(named: "wedding2"),
+            UIImage(named: "wedding3"),
+            UIImage(named: "wedding4"),
+            UIImage(named: "wedding5")]
+        
+        scrollView.contentSize = feedImage.frame.size
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,17 +46,19 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
-        
-        var destinationVC = segue.destinationViewController as UIViewController
-        destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-        destinationVC.transitioningDelegate = self
-        
-        var destinationViewController = segue.destinationViewController as FullScreenImageViewController
+        if segue.identifier == "imageSegue" {
+            var destinationVC = segue.destinationViewController as UIViewController
+            destinationVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+            destinationVC.transitioningDelegate = self
+            
+            var destinationViewController = segue.destinationViewController as FullScreenImageViewController
+            
+            tappedView = sender.view as UIImageView
+            var imageToPass: UIImage! = tappedView.image
 
-        tappedView = sender.view as UIImageView
-        var imageToPass: UIImage! = tappedView.image
-
-        destinationViewController.image = imageToPass
+            destinationViewController.image = imageToPass
+            destinationViewController.imageArray = imageArray
+        }
     }
     
     @IBAction func onWedding1Tap(sender: UITapGestureRecognizer) {
@@ -94,8 +107,9 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         var newImageView: UIImageView = UIImageView(frame: frame)
         var finalFrame = CGRect(x: 0, y: 50, width: 320, height: 480)
         newImageView.image = tappedView.image
+        println(newImageView.image?.size)
         newImageView.contentMode = UIViewContentMode.ScaleAspectFit
-        
+
         if (isPresenting) {
             
             window.addSubview(newImageView)
@@ -110,13 +124,13 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                     transitionContext.completeTransition(true)
             }
         } else {
-            
             newImageView.frame = finalFrame
             window.addSubview(newImageView)
-            
+            fromViewController.view.alpha = 0
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 newImageView.frame = frame
-                fromViewController.view.alpha = 0
+                newImageView.contentMode = UIViewContentMode.ScaleAspectFit
+                
                 }) { (finished: Bool) -> Void in
                     newImageView.removeFromSuperview()
                     transitionContext.completeTransition(true)
